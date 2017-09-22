@@ -23,16 +23,16 @@ public class URLConnectionTest {
     public void testURLEmpty() throws Exception {
         Parser jsonObject = new Parser();
         jsonObject.parseJsonFile("Soup", 4);
-        boolean result -jsonObject.isEmpty();
+        boolean result = jsonObject.isEmpty();
         Assert.assertEquals(true, result);
     }
 
     @Test
     public void testURLInvalidText() throws Exception {
         Parser jsonObject = new Parser ();
-        jsonObject.parse.JsonFile("SLKDJFF", 4);
+        jsonObject.parseJsonFile("SLKDJFF", 4);
         boolean result = jsonObject.isEmpty();
-        Assert.assertEqualsIs(true, result);
+        Assert.assertEquals(true, result);
     }
 
     @Test
