@@ -7,6 +7,6 @@ public class RevisionTest {
     @Test
     public void firstUserKorveto() throws IOException {
         Parser parser = new Parser();
-        parser.parseJsonFile("Soup", 4);♦
+        parser.parseJsonFile("Soup", 4);
     }
 }
