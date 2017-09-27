@@ -19,7 +19,6 @@
             </plugin>
         </plugins>
     </build>
-
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -32,11 +31,10 @@
             <version>RELEASE</version>
         </dependency>
         <dependency>
-                <groupId>com.google.guava<groupId>
+                <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>19.0</version>
             </dependency>
-
         </dependency>
     </dependencies>
 

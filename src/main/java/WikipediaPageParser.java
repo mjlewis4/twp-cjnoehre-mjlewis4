@@ -6,6 +6,7 @@ import com.sun.org.apache.regexp.internal.RE;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +26,21 @@ public class WikipediaPageParser {
         }
         URL url = null;
         try {
-            url = new URL("https:");
+            url = new URL("https://en.wikipedia.org/w/api/php?action=query&format=json&prop=revisions&titles=" + searchTitle + "&rvprop=timestamp|user&rvlimit=" + revisionAmount + "&redirects");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        URL url = null;
+        URLConnection connection = null;
         try {
             connection = url.openConnection();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        connection.setRequestProperty("User-Agent", "Revision Tracker/0.1 (http://www.cs.bsu.edu/~pvg/courses/cs222Fa17; me@bsu.edu}");
+        com.google.gson.JsonParser parser = new com.google.gson.JsonParser();
+        try {
+            inputStream = connection.getInputStream();
+        }catch (IOException e) {
             e.printStackTrace();
         }
         Reader reader = new InputStreamReader(inputStream);
@@ -46,7 +54,7 @@ public class WikipediaPageParser {
         JsonObject pages = rootObject.getAsJsonObject("query").getAsJsonObject("pages");
 
         Boolean pageFound = true;
-        for (Map.Entry<String, JsonElement> etnry : pages.entrySet()) {
+        for (Map.Entry<String, JsonElement> entry : pages.entrySet()) {
             if (entry.getKey().equals("-1")) {
                 pageFound = false;
             }

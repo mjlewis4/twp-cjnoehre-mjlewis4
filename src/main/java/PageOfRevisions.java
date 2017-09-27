@@ -1,7 +1,6 @@
-import com.google.gson.JsonArray;
 import java.security.Timestamp;
-import java.util.*;
-import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -26,9 +25,9 @@ public class PageOfRevisions {
         }
 
         for (int i = 0; i < usernameList.size(); i++) {
-            for (int j = i + 1; j < usernames.size(); j++) {
+            for (int j = 0; j < usernames.size(); j++) {
                 int firstCount = revisionCount.count(usernames.get(i).getUsername());
-                int secondCount = revisionCount.count(usernames.get(i).getUsername());
+                int secondCount = revisionCount.count(usernames.get(j).getUsername());
                 if (secondCount > firstCount) {
                     User firstUser = usernames.get(i);
                     User secondUser = usernames.get(j);
@@ -42,8 +41,9 @@ public class PageOfRevisions {
                             User firstUser = usernames.get(i);
                             User secondUser = usernames.get(j);
                             usernames.set(i, secondUser);
-                            usernames.set(j, firstUser);
                             firstUser.getRevisionList().add(secondUser.getRevisionList().get(0));
+                            usernames.set(j, firstUser);
+
                         }
                     }
                 }

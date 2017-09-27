@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.swing.text.html.parser.Parser;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -28,16 +29,8 @@ public class URLConnectionTest {
     }
 
     @Test
-    public void testURLEmpty() throws Exception {
-        Parser jsonObject = new Parser();
-        jsonObject.parseJsonFile("Soup", "4");
-        boolean result = jsonObject.isEmpty();
-        Assert.assertEquals(true, result);
-    }
-
-    @Test
     public void testURLInvalidText() throws Exception {
-        Parser jsonObject = new Parser ();
+        WikipediaPageParser jsonObject = new WikipediaPageParser();
         jsonObject.parseJsonFile("SLKDJFF", "4");
         boolean result = jsonObject.isEmpty();
         Assert.assertEquals(true, result);
@@ -45,7 +38,15 @@ public class URLConnectionTest {
 
     @Test
     public void testNetworkConnection() throws Exception {
-        Parser jsonObject = new Parser();
+        WikipediaPageParser jsonObject = new WikipediaPageParser();
+        jsonObject.parseJsonFile("Soup", "4");
+        boolean result = jsonObject.isConnected();
+        Assert.assertEquals(true, result);
+    }
+
+    @Test
+    public void testNetworkC3Connection() throws Exception {
+        WikipediaPageParser jsonObject = new WikipediaPageParser();
         jsonObject.parseJsonFile("Soup", "4");
         boolean result = jsonObject.isConnected();
         Assert.assertEquals(true, result);

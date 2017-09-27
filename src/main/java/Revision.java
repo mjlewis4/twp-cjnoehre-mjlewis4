@@ -8,7 +8,7 @@ public class Revision {
     public String utcTime;
     public String timestamp;
 
-    public Revision(String user, String timestamp) {
+    public Revision(String user) {
         timestamp = changeTimeZone(utcTime);
         this.timestamp = timestamp;
     }

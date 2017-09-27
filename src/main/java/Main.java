@@ -4,10 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -33,6 +30,11 @@ public class Main extends Application {
 
         CheckBox urlConnectionCb = new CheckBox("URL Connection");
         CheckBox pageFoundCb = new CheckBox("Timestamp");
+        Label redirectLabel = new Label("");
+
+        TableView table = new TableView();
+        TableColumn usernameCol = new TableColumn("Username");
+        TableColumn timeCol = new TableColumn("Timestamp");
         timeCol.setMinWidth(300);
         table.setEditable(true);
         table.getColumns().addAll(usernameCol, timeCol);
@@ -51,12 +53,12 @@ public class Main extends Application {
 
                 ObservableList list = FXCollections.observableArrayList(page.getUserList());
 
-                usernameCol.setCellValueFactory {
-                    new PropertyValueFactory<User,String>("username");
-                };
-                timeCol.setCellValueProperty{
-                    new PropertyValueFactory<Revision,String>("revisions");
-                };
+                usernameCol.setCellValueFactory(
+                    new PropertyValueFactory<User,String>("username")
+                );
+                timeCol.setCellValueFactory(
+                    new PropertyValueFactory<Revision,String>("revisions")
+                );
 
                 table.setItems(list);
             }
