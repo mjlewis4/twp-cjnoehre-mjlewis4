@@ -5,17 +5,29 @@ public class User {
 
     public ArrayList<Revision> revisionList = new ArrayList();
     public String username;
+    public String revisions;
 
     public Revision getRevision(String searchName) { return revisionList.get(0); }
 
-    public User(String username) {
-        this.username = username;
-        //System.out.println(username);
-    }
+    public User(String username) { this.username = username; }
 
     public void addRevision(Revision revision) { revisionList.add(revision); }
 
-    public ArrayList<Revision> getRevisions() { return this.revisionList; }
+    public String getRevisions(){
+        StringBuilder builder = new StringBuilder();
+        int count = 0;
+        for (Revision revision : revisionList){
+            if(count < 1) {
+                builder.append(revision.getTimestamp());
+                count++;
+            }else{
+                builder.append(" -- ");
+                builder.append(revision.getTimestamp());
+                count++;
+            }
+        }
+        return builder.toString();
+    }
 
-    public String getName() { return this.username; }
+    public String getUsername() { return this.username; }
 }

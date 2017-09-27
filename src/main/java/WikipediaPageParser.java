@@ -1,17 +1,18 @@
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.sun.org.apache.regexp.internal.RE;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import static java.net.URLEncoder.encode;
 
-public class Parser {
+public class WikipediaPageParser {
 
     JsonArray array = null;
     InputStream inputStream;
@@ -24,21 +25,13 @@ public class Parser {
         }
         URL url = null;
         try {
-            url = new URL("https;//en.wikipeida.org/w/api.php?action=query&format=json&prop=revisions&titles=" + searchTitle + "&rvprop=timestamp|user&rvlimit=" + revisionAmount + "&redirects");
+            url = new URL("https:");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        URLConnection connection = null;
+        URL url = null;
         try {
             connection = url.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        connection.setRequestProperty("Userkaj");
-        com.google.gson.JsonParser parser = new com.google.gson.JsonParser();
-
-        try {
-            inputStream = connection.getInputStream();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,7 +46,7 @@ public class Parser {
         JsonObject pages = rootObject.getAsJsonObject("query").getAsJsonObject("pages");
 
         Boolean pageFound = true;
-        for (Map.Entry<String, JsonElement> entry : pages.entrySet()) {
+        for (Map.Entry<String, JsonElement> etnry : pages.entrySet()) {
             if (entry.getKey().equals("-1")) {
                 pageFound = false;
             }
@@ -62,7 +55,7 @@ public class Parser {
         }
         String redirectedAfter = pageName;
         String redirectedBefore = pageName;
-        if (query.has("redirected")) {
+        if (query.has("redirects")) {
             JsonArray redirected = query.getAsJsonArray("redirects");
             redirectedAfter = redirected.get(0).getAsJsonObject().get("to").getAsString();
             redirectedBefore = redirected.get(0).getAsJsonObject().get("from").getAsString();
@@ -72,7 +65,7 @@ public class Parser {
             for (int i = 0; i < array.size(); i++) {
                 String username = array.get(i).getAsJsonObject().get("user").getAsString();
                 User user = new User(username);
-                username.add(user);
+                usernameList.add(user);
 
                 String timestamp = array.get(i).getAsJsonObject().get("timestamp").getAsString();
                 Revision revision = new Revision(timestamp);
@@ -87,18 +80,16 @@ public class Parser {
     }
 
     public boolean isConnected() {
-        if(inputStream == null) {
+        if (inputStream == null) {
             return false;
         }
-
         return true;
     }
 
     public boolean isEmpty() {
-        if(array == null){
+        if (array == null) {
             return true;
         }
-
         return false;
     }
 

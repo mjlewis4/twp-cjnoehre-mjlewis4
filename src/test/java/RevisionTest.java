@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -5,8 +6,9 @@ import java.io.IOException;
 public class RevisionTest {
 
     @Test
-    public void firstUserKorveto() throws IOException {
-        Parser parser = new Parser();
-        parser.parseJsonFile("Soup", 4);
+    public void testDuplicates() throws IOException {
+        WikipediaPageParser  wikipediaPageParser = new WikipediaPageParser();
+        PageOfRevisions page = wikipediaPageParser.parseJsonFile("Soup", "40");
+        Assert.assertNotEquals(page.getUserList().size(), 40);
     }
 }
