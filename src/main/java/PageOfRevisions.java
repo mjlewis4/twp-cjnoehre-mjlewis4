@@ -3,6 +3,8 @@ import java.security.Timestamp;
 import java.util.*;
 import java.time.ZonedDateTime;
 
+
+
 public class PageOfRevisions {
     public String name;
     public String redirectedAfter;
@@ -17,37 +19,37 @@ public class PageOfRevisions {
         this.isNotFound = isNotFound;
     }
 
-    public void searchSameUser(List<User> username) {
+    public void searchSameUser(List<User> usernames) {
         HashMultiset<String> revisionCount = HashMultiset.create();
-        for (User user : username) {
+        for (User user : usernames) {
             revisionCount.add(user.getUsername());
         }
 
         for (int i = 0; i < usernameList.size(); i++) {
-            for (int j = i + 1; j < username.size(); j++) {
-                int firstCount = revisionCount.count(username.get(i).getUsername());
-                int secondCount = revisionCount.count(username.get(i).getUsername());
+            for (int j = i + 1; j < usernames.size(); j++) {
+                int firstCount = revisionCount.count(usernames.get(i).getUsername());
+                int secondCount = revisionCount.count(usernames.get(i).getUsername());
                 if (secondCount > firstCount) {
-                    User firstUser = username.get(i);
-                    User secondUser = username.get(j);
-                    username.set(i, secondUser);
-                    username.set(j, firstUser);
+                    User firstUser = usernames.get(i);
+                    User secondUser = usernames.get(j);
+                    usernames.set(i, secondUser);
+                    usernames.set(j, firstUser);
                 } else if (secondCount == firstCount) {
                     if (secondCount > 1) {
-                        Timestamp firstTimeStamp = Timestamp.valueOf(username.get(i).getRevisionList().get(0).getTimestamp());
-                        Timestamp secondTimeStamp = Timestamp.valueOf(username.get(j).getRevisionList().get(0).getTimestamp());
+                        Timestamp firstTimeStamp = Timestamp.valueOf(usernames.get(i).getRevisionList().get(0).getTimestamp());
+                        Timestamp secondTimeStamp = Timestamp.valueOf(usernames.get(j).getRevisionList().get(0).getTimestamp());
                         if (firstTimeStamp.after(secondTimeStamp)) {
-                            User firstUser = username.get(i);
-                            User secondUser = username.get(j);
-                            username.set(i, secondUser);
-                            username.set(j, firstUser);
+                            User firstUser = usernames.get(i);
+                            User secondUser = usernames.get(j);
+                            usernames.set(i, secondUser);
+                            usernames.set(j, firstUser);
                             firstUser.getRevisionList().add(secondUser.getRevisionList().get(0));
                         }
                     }
                 }
             }
         }
-        for (User user : username) {
+        for (User user : usernames) {
             usernameList.add(user);
         }
     }

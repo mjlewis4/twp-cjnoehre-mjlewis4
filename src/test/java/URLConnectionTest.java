@@ -30,7 +30,7 @@ public class URLConnectionTest {
     @Test
     public void testURLEmpty() throws Exception {
         Parser jsonObject = new Parser();
-        jsonObject.parseJsonFile("Soup", 4);
+        jsonObject.parseJsonFile("Soup", "4");
         boolean result = jsonObject.isEmpty();
         Assert.assertEquals(true, result);
     }
@@ -38,7 +38,7 @@ public class URLConnectionTest {
     @Test
     public void testURLInvalidText() throws Exception {
         Parser jsonObject = new Parser ();
-        jsonObject.parseJsonFile("SLKDJFF", 4);
+        jsonObject.parseJsonFile("SLKDJFF", "4");
         boolean result = jsonObject.isEmpty();
         Assert.assertEquals(true, result);
     }
@@ -46,7 +46,7 @@ public class URLConnectionTest {
     @Test
     public void testNetworkConnection() throws Exception {
         Parser jsonObject = new Parser();
-        jsonObject.parseJsonFile("Soup", 4);
+        jsonObject.parseJsonFile("Soup", "4");
         boolean result = jsonObject.isConnected();
         Assert.assertEquals(true, result);
     }
