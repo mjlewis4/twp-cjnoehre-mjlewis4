@@ -1,7 +1,7 @@
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.sun.org.apache.regexp.internal.RE;
+import com.google.gson.JsonParser;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -37,21 +37,19 @@ public class WikipediaPageParser {
             e.printStackTrace();
         }
         connection.setRequestProperty("User-Agent", "Revision Tracker/0.1 (http://www.cs.bsu.edu/~pvg/courses/cs222Fa17; me@bsu.edu}");
-        com.google.gson.JsonParser parser = new com.google.gson.JsonParser();
+        JsonParser parser = new JsonParser();
         try {
             inputStream = connection.getInputStream();
         }catch (IOException e) {
             e.printStackTrace();
         }
-        Reader reader = new InputStreamReader(inputStream);
-        JsonElement rootElement = parser.parse(reader);
+        JsonElement rootElement = parser.parse(new InputStreamReader(inputStream));
         JsonObject rootObject = rootElement.getAsJsonObject();
-        JsonObject query = rootObject.getAsJsonObject("query");
+        JsonObject pages = rootObject.getAsJsonObject("query").getAsJsonObject("pages");
         String pageName = searchTitle;
 
         List<User> usernameList = new ArrayList<>();
 
-        JsonObject pages = rootObject.getAsJsonObject("query").getAsJsonObject("pages");
 
         Boolean pageFound = true;
         for (Map.Entry<String, JsonElement> entry : pages.entrySet()) {
@@ -63,8 +61,8 @@ public class WikipediaPageParser {
         }
         String redirectedAfter = pageName;
         String redirectedBefore = pageName;
-        if (query.has("redirects")) {
-            JsonArray redirected = query.getAsJsonArray("redirects");
+        if (pages.has("redirects")) {
+            JsonArray redirected = pages.getAsJsonArray("redirects");
             redirectedAfter = redirected.get(0).getAsJsonObject().get("to").getAsString();
             redirectedBefore = redirected.get(0).getAsJsonObject().get("from").getAsString();
         }

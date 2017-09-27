@@ -26,8 +26,8 @@ public class PageOfRevisions {
             revisionCount.add(user.getUsername());
         }
 
-        for (int i = 0; i < usernameList.size(); i++) {
-            for (int j = 0; j < usernames.size(); j++) {
+        for (int i = 0; i < usernames.size(); i++) {
+            for (int j = i+1; j < usernames.size(); j++) {
                 int firstCount = revisionCount.count(usernames.get(i).getUsername());
                 int secondCount = revisionCount.count(usernames.get(j).getUsername());
                 if (secondCount > firstCount) {
@@ -35,10 +35,10 @@ public class PageOfRevisions {
                     User secondUser = usernames.get(j);
                     usernames.set(i, secondUser);
                     usernames.set(j, firstUser);
-                } /*else if (secondCount == firstCount) {
+                } else if (secondCount == firstCount) {
                     if (secondCount > 1) {
-                        Timestamp firstTimeStamp = Timestamp.valueOf(usernames.get(i).getRevisionList().get(0).getTimestamp());
-                        Timestamp secondTimeStamp = Timestamp.valueOf(usernames.get(j).getRevisionList().get(0).getTimestamp());
+                        String firstTimeStamp = usernames.get(i).getRevisionList().get(0).getTimestamp();
+                        String secondTimeStamp = usernames.get(j).getRevisionList().get(0).getTimestamp();
                         if (firstTimeStamp.equals(secondTimeStamp)) {
                             User firstUser = usernames.get(i);
                             User secondUser = usernames.get(j);
@@ -48,7 +48,7 @@ public class PageOfRevisions {
 
                         }
                     }
-                }*/
+                }
             }
         }
         for (User user : usernames) {
