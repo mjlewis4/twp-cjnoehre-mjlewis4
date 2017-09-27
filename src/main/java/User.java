@@ -30,4 +30,8 @@ public class User {
     }
 
     public String getUsername() { return this.username; }
+
+    public ArrayList<Revision> getRevisionList() {
+        return revisionList;
+    }
 }
