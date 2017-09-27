@@ -35,11 +35,11 @@ public class PageOfRevisions {
                     User secondUser = usernames.get(j);
                     usernames.set(i, secondUser);
                     usernames.set(j, firstUser);
-                } else if (secondCount == firstCount) {
+                } /*else if (secondCount == firstCount) {
                     if (secondCount > 1) {
                         Timestamp firstTimeStamp = Timestamp.valueOf(usernames.get(i).getRevisionList().get(0).getTimestamp());
                         Timestamp secondTimeStamp = Timestamp.valueOf(usernames.get(j).getRevisionList().get(0).getTimestamp());
-                        if (firstTimeStamp.after(secondTimeStamp)) {
+                        if (firstTimeStamp.equals(secondTimeStamp)) {
                             User firstUser = usernames.get(i);
                             User secondUser = usernames.get(j);
                             usernames.set(i, secondUser);
@@ -48,7 +48,7 @@ public class PageOfRevisions {
 
                         }
                     }
-                }
+                }*/
             }
         }
         for (User user : usernames) {

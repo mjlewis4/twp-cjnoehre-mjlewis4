@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class UserTest {
 
-    @Test
+    /*@Test
     public void testDuplicateRevisions() throws IOException {
-        Parser parser = new Parser();
+        WikipediaPageParser parser = new WikipediaPageParser();
         PageOfRevisions soupPage = parser.parseJsonFile("Soup", 40);
         System.out.println("After List" + soupPage.getUserNameSizeAfter());
         System.out.println("After List" + soupPage.getUserNameSizeBefore());
@@ -17,5 +17,5 @@ public class UserTest {
                 //System.out.println(userList.get(i).getRevisions());
             }
         }
-    }
+    }*/
 }
