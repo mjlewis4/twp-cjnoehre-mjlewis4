@@ -26,7 +26,7 @@ public class WikipediaPageParser {
         }
         URL url = null;
         try {
-            url = new URL("https://en.wikipedia.org/w/api/php?action=query&format=json&prop=revisions&titles=" + searchTitle + "&rvprop=timestamp|user&rvlimit=" + revisionAmount + "&redirects");
+            url = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=" + searchTitle + "&rvprop=timestamp|user&rvlimit=" + revisionAmount + "&redirects");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
